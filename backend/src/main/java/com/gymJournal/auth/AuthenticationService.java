@@ -4,6 +4,8 @@ import com.gymJournal.member.Member;
 import com.gymJournal.member.MemberDTO;
 import com.gymJournal.member.MemberDTOMapper;
 import com.gymJournal.jwt.JWTUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ public class AuthenticationService {
     private final MemberDTOMapper memberDTOMapper;
     private final JWTUtil jwtUtil;
 
+    Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
     public AuthenticationService(AuthenticationManager authenticationManager,
                                  MemberDTOMapper memberDTOMapper,
                                  JWTUtil jwtUtil) {
@@ -31,6 +34,7 @@ public class AuthenticationService {
                         request.password()
                 )
         );
+        logger.info("Hello WORLD");
         Member principal = (Member) authentication.getPrincipal();
         MemberDTO memberDTO = memberDTOMapper.apply(principal);
         String token = jwtUtil.issueToken(memberDTO.username(), memberDTO.roles());
