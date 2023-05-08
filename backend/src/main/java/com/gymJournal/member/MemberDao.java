@@ -3,7 +3,7 @@ package com.gymJournal.member;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberDao {
+interface MemberDao {
     List<Member> selectAllMembers();
     Optional<Member> selectMemberById(Integer id);
     void insertMember(Member memeber);
