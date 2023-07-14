@@ -1,5 +1,6 @@
 package com.gymJournal.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","password","authorities","accountNonLocked","accountNonExpired","credentialsNonExpired","username","enabled"})
 @Entity
 @Table(
         name = "member",

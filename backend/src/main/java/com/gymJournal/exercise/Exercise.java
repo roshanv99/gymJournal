@@ -1,11 +1,13 @@
 package com.gymJournal.exercise;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gymJournal.category.Category;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Exercise {
 
     @Id
@@ -18,7 +20,8 @@ public class Exercise {
             strategy = GenerationType.SEQUENCE,
             generator = "exercise_seq"
     )
-    private Long id;
+    @Column(name="exercise_id")
+    private Long exerciseId;
 
     private String title;
 
@@ -39,12 +42,12 @@ public class Exercise {
         this.tutorial = tutorial;
     }
 
-    public Long getId() {
-        return id;
+    public Long getExercise_id() {
+        return exerciseId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setExercise_id(Long exercise_id) {
+        this.exerciseId = exercise_id;
     }
 
     public String getTitle() {
@@ -83,12 +86,12 @@ public class Exercise {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Exercise exercise)) return false;
-        return Objects.equals(id, exercise.id) && Objects.equals(title, exercise.title) && Objects.equals(category, exercise.category) && Objects.equals(image, exercise.image) && Objects.equals(tutorial, exercise.tutorial);
+        return Objects.equals(exerciseId, exercise.exerciseId) && Objects.equals(title, exercise.title) && Objects.equals(category, exercise.category) && Objects.equals(image, exercise.image) && Objects.equals(tutorial, exercise.tutorial);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, category, image, tutorial);
+        return Objects.hash(exerciseId, title, category, image, tutorial);
     }
 }
 

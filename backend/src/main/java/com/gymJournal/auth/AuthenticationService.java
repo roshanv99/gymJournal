@@ -34,7 +34,6 @@ public class AuthenticationService {
                         request.password()
                 )
         );
-        logger.info("Hello WORLD");
         Member principal = (Member) authentication.getPrincipal();
         MemberDTO memberDTO = memberDTOMapper.apply(principal);
         String token = jwtUtil.issueToken(memberDTO.username(), memberDTO.roles());

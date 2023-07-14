@@ -20,28 +20,28 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner(
-            MemberRepository memberRepository,
-            PasswordEncoder passwordEncoder) {
-        return args -> {
-            var faker = new Faker();
-            Random random = new Random();
-            Name name = faker.name();
-            String firstName = name.firstName();
-            String lastName = name.lastName();
-            int age = random.nextInt(16, 99);
-            Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
-            String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gymJournal.com";
-            Member Member = new Member(
-                    firstName +  " " + lastName,
-                    email,
-                    passwordEncoder.encode("password"),
-                    age,
-                    gender);
-            memberRepository.save(Member);
-            System.out.println(email);
-        };
-    }
+//    @Bean
+//    CommandLineRunner runner(
+//            MemberRepository memberRepository,
+//            PasswordEncoder passwordEncoder) {
+//        return args -> {
+//            var faker = new Faker();
+//            Random random = new Random();
+//            Name name = faker.name();
+//            String firstName = name.firstName();
+//            String lastName = name.lastName();
+//            int age = random.nextInt(16, 99);
+//            Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+//            String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gymJournal.com";
+//            Member Member = new Member(
+//                    firstName +  " " + lastName,
+//                    email,
+//                    passwordEncoder.encode("password"),
+//                    age,
+//                    gender);
+//            memberRepository.save(Member);
+//            System.out.println(email);
+//        };
+//    }
 
 }

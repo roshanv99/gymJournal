@@ -21,7 +21,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
     @Override
     public List<Member> selectAllMembers() {
         var sql = """
-                SELECT id, name, email, password, age, gender
+                SELECT exercise_id, name, email, password, age, gender
                 FROM member
                 LIMIT 1000
                 """;
@@ -30,13 +30,13 @@ public class MemberJDBCDataAccessService implements MemberDao {
     }
 
     @Override
-    public Optional<Member> selectMemberById(Integer id) {
+    public Optional<Member> selectMemberById(Integer exercise_id) {
         var sql = """
-                SELECT id, name, email, password, age, gender
+                SELECT exercise_id, name, email, password, age, gender
                 FROM member
-                WHERE id = ?
+                WHERE exercise_id = ?
                 """;
-        return jdbcTemplate.query(sql, memberRowMapper, id)
+        return jdbcTemplate.query(sql, memberRowMapper, exercise_id)
                 .stream()
                 .findFirst();
     }
@@ -62,7 +62,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
     @Override
     public boolean existsMemberWithEmail(String email) {
         var sql = """
-                SELECT count(id)
+                SELECT count(exercise_id)
                 FROM member
                 WHERE email = ?
                 """;
@@ -71,13 +71,13 @@ public class MemberJDBCDataAccessService implements MemberDao {
     }
 
     @Override
-    public boolean existsMemberById(Integer id) {
+    public boolean existsMemberById(Integer exercise_id) {
         var sql = """
-                SELECT count(id)
+                SELECT count(exercise_id)
                 FROM member
-                WHERE id = ?
+                WHERE exercise_id = ?
                 """;
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, exercise_id);
         return count != null && count > 0;
     }
 
@@ -86,7 +86,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
         var sql = """
                 DELETE
                 FROM member
-                WHERE id = ?
+                WHERE exercise_id = ?
                 """;
         int result = jdbcTemplate.update(sql, memberId);
         System.out.println("deleteMemberById result = " + result);
@@ -95,7 +95,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
     @Override
     public void updateMember(Member update) {
         if (update.getName() != null) {
-            String sql = "UPDATE member SET name = ? WHERE id = ?";
+            String sql = "UPDATE member SET name = ? WHERE exercise_id = ?";
             int result = jdbcTemplate.update(
                     sql,
                     update.getName(),
@@ -104,7 +104,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
             System.out.println("update member name result = " + result);
         }
         if (update.getAge() != null) {
-            String sql = "UPDATE member SET age = ? WHERE id = ?";
+            String sql = "UPDATE member SET age = ? WHERE exercise_id = ?";
             int result = jdbcTemplate.update(
                     sql,
                     update.getAge(),
@@ -113,7 +113,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
             System.out.println("update member age result = " + result);
         }
         if (update.getEmail() != null) {
-            String sql = "UPDATE member SET email = ? WHERE id = ?";
+            String sql = "UPDATE member SET email = ? WHERE exercise_id = ?";
             int result = jdbcTemplate.update(
                     sql,
                     update.getEmail(),
@@ -125,7 +125,7 @@ public class MemberJDBCDataAccessService implements MemberDao {
     @Override
     public Optional<Member> selectUserByEmail(String email) {
         var sql = """
-                SELECT id, name, email, password, age, gender
+                SELECT exercise_id, name, email, password, age, gender
                 FROM member
                 WHERE email = ?
                 """;

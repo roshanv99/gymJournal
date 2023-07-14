@@ -120,6 +120,15 @@
             <version>${jsonwebtoken.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>2.20.26</version>
+        </dependency>
 
     </dependencies>
 
@@ -130,7 +139,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>pre-integration-test</id>
+                        <exercise_id>pre-integration-test</exercise_id>
                         <goals>
                             <goal>start</goal>
                         </goals>
@@ -141,7 +150,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>post-integration-test</id>
+                        <exercise_id>post-integration-test</exercise_id>
                         <goals>
                             <goal>stop</goal>
                         </goals>
@@ -176,7 +185,7 @@
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>reserve-tomcat-port</id>
+                        <exercise_id>reserve-tomcat-port</exercise_id>
                         <goals>
                             <goal>reserve-network-port</goal>
                         </goals>
